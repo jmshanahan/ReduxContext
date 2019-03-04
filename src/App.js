@@ -1,28 +1,34 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Provider } from 'react-redux';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import store from './store';
+import Counter from './counter';
 import './App.css';
+
+const styles = theme => ({
+  root: {
+    textAlign: 'center',
+    paddingTop: theme.spacing.unit * 20
+  }
+});
 
 class App extends Component {
   render() {
+    const { classes } = this.props;
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className={classes.root}>
+        <Provider store={store}>
+          <CssBaseline />
+          <Typography variant="h1" gutterBottom>
+            Redux Example
+          </Typography>
+          <Counter />
+        </Provider>
       </div>
     );
   }
 }
 
-export default App;
+export default withStyles(styles)(App);
